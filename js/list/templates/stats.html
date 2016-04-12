@@ -1,0 +1,35 @@
+<div class="tabs-striped tabs-top tabs-color-light tabs-icon-top">
+    <div class="tabs">
+        <a class="tab-item" ui-sref="list">
+            <i class="icon ion-home"></i>
+            List
+        </a>
+        <a class="tab-item active" ui-sref="stats">
+            <i class="icon ion-stats-bars"></i>
+            Statistics
+        </a>
+    </div>
+</div>
+
+
+
+<ion-view title="Statistics" hide-back-button="true">
+    <ion-content padding="'true'" class="has-tabs-top">
+
+    <h3>Price per liter</h3>
+        <canvas id="line2" class="chart chart-line" chart-data="localArrayData2"
+                chart-labels="localArrayLabels" chart-legend="false" options="{showScale: true, }">
+        </canvas>
+
+        <h3>Gas stations</h3>
+        <canvas id="doughnut" class="chart chart-doughnut"
+                chart-data="data3" chart-labels="labels3" chart-colours="colours" chart-legend="true" options="{animationSteps : 60,}">
+        </canvas>
+
+
+        <h3>Km per liter</h3>
+        <canvas id="bar2" class="chart chart-bar" chart-data="data5"
+                chart-labels="labels5" chart-legend="true" chart-series="series5" >
+        </canvas>
+    </ion-content>
+</ion-view>

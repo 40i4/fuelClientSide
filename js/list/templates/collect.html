@@ -1,0 +1,64 @@
+<div class="tabs-striped  tabs-top  tabs-color-light tabs-icon-top">
+    <div class="tabs">
+        <a class="tab-item active" ui-sref="list">
+            <i class="icon ion-home"></i>
+            List
+        </a>
+        <a class="tab-item" ui-sref="stats">
+            <i class="icon ion-stats-bars"></i>
+            Statistics
+        </a>
+    </div>
+</div>
+
+
+<ion-view title="Entries" hide-back-button="true">
+    <ion-content padding="'true'" class="has-tabs-top">
+
+        <!--<button class="button" ng-click="deleteGas()">delete gassstations</button>-->
+
+        <ion-list show-delete="false" can-swipe="true">
+            <ion-item class="firstPageList" ng-click="goToEditView(entry.entryId)" ng-repeat="entry in entries | orderBy:'-tankDate'">
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteEntry(entry, entries)"></ion-option-button>
+
+
+
+
+                <div class="row">
+                    <div class="col col-50"><tankDate><b>{{entry.tankDate | date: "dd MMM"}}</b></tankDate></div>
+                </div>
+                <div class="row">
+                    <div class="col col-75"></div>
+                    <totalCost class="col" align="center">{{entry.totalCost}} zł</totalCost>
+                </div>
+                <div class="row">
+                    <div class="col col-75"></div>
+                    <div class="col col-center"><h3 align="center" style="font-size: medium">{{entry.pricePerLiter}} zł / l</h3></div>
+                </div>
+                <div class="row">
+                    <div class="col col-50">
+                        <h3 style="font-size: medium">
+                            <i class="fa fa-road"></i>
+                            {{entry.kmEnd - entry.kmStart}} km
+                        </h3>
+                    </div>
+                </div>
+
+
+            </ion-item>
+
+        </ion-list>
+
+    </ion-content>
+
+
+    <div class="float-button fab">
+        <span class="height-fix">
+            <a ng-href="#/add" class="content">
+                <i class="ion-android-add"> </i>
+            </a>
+        </span>
+    </div>
+
+</ion-view>
+
