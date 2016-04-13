@@ -7,7 +7,6 @@
     </ion-nav-bar>
 
     <ion-content padding="'true'" class="has-header">
-        <!--ng-submit="insert(dataToInsert, tankDate, picFile)"-->
         <form name="form" novalidate>
 
             <div class="row">
@@ -92,20 +91,12 @@
 
             <div class="row">
                 <div class="col" >
-                    <!--<label class="item item-input item-input-select">-->
-                    <!--<span class="input-label" style="font-size: small;">Gas station</span>-->
-                    <!--<select class="ion-input-select" ng-model="dataToInsert.gasStation"-->
-                    <!--ng-options="station for station in gasStationsToSelect">-->
-                    <!--</select>-->
-                    <!--<br/>-->
-                    <!--</label>-->
-
+               
                     <label class="item"><span class="input-label" style="font-size: small;">Gas station name</span>
                         <input type="text" style="margin-left:5px;" ng-model="dataToInsert.gasStation" placeholder="Gas station name"/>
                     </label>
                 </div>
             </div>
-
 
 
             <div class="row">
@@ -119,8 +110,6 @@
 
             <br/>
 
-
-
             <div>
                 <label class="item item-input item-floating-label">
                     <span class="input-label" style="font-size: small;">Comment</span>
@@ -129,16 +118,6 @@
             </div>
 
             <br/>
-
-
-
-            <!--<div>-->
-            <!--<input type="file" id="file" name='file' ng-model="picFile" ngf-select ng-model="picFile" name="file"-->
-            <!--ngf-accept="'image/*'" ngf-max-size="2MB" ngf-model-invalid="errorFiles" />-->
-            <!--</div>-->
-
-            <!--<button class="button button-full button-energized" ng-click="addMedia()"></button>-->
-
 
             <a class="item item-list-detail">
                 <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
@@ -149,20 +128,7 @@
             <br/>
             <button class="button button-stable" ng-click="addImage()">Add picture</button>
 
-
-
-
-            <!--<a class="item item-list-detail">-->
-            <!--<ion-scroll direction="x">-->
-            <!--<img ng-repeat="imagePath in imagesToAdd track by $index" ng-if="imagePath" ng-src="{{ imagePath }}" ng-click="showImages($index)" style="width: 200px; height: 200px; margin: 0px 10px" class="image-list-thumb"/>-->
-            <!--</ion-scroll>-->
-            <!--</a>-->
-
-            <!--<button class="button button-royal" ng-click="sendPhoto(dataToInsert, picFile)">Send photo</button>-->
-
             <div class="spacer" style="width: 300px; height: 38px;"></div>
-
-            <!--<button ng-disabled="form.$invalid || form.$error.min" ng-click="insert(dataToInsert, tankDate); addNewGasStation(dataToInsert.gasStation)" class="button button-balanced button-block" type="submit" ui-sref="list">Add entry</button>-->
 
         </form>
     </ion-content>

@@ -15,148 +15,131 @@
 
 
     <ion-content padding="'true'" class="has-header">
-
-
-            <div class="row">
-                <div class="col col-50" style="margin-left:25%; margin-right:25%;">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small">Total cost</span>
-                        <input name="tc" min="0" type="number" style="color: #2dab00; font-size: large" step="0.01" placeholder="Total cost" ng-model="entry.totalCost">
-                        <p class="help-block" style="color:red; font-size:small;" ng-show="form.tc.$invalid">Invalid value</p>
-                    </label>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col col-40" style="margin-left:8%; margin-right:8%; text-align: center;">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small;">Liters</span>
-                        <input name="l" min="0" type="number" style="color: #2dab00; font-size: large" step="0.01" placeholder="Liters" ng-model="entry.litres">
-                        <!--<p class="help-block" style="color:red; font-size:small;" ng-show="form.l.$error.min">Value too small</p>-->
-                        <p class="help-block" style="color:red; font-size:small;" ng-show="form.l.$invalid">Invalid value</p>
-
-                    </label>
-                </div>
-                <div class="col col-40" style="margin-left:8%; margin-right:8%; ">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small;">Price per liter</span>
-                        <input name="ppl" min="0" type="number" style="color: #2dab00; font-size: large" step="0.01" placeholder="Price per liter" ng-model="entry.pricePerLiter">
-                        <p class="help-block" style="color:red; font-size:small;" ng-show="form.ppl.$invalid">Invalid value</p>
-                    </label>
-                </div>
-            </div>
-
-            <br/>
-
-            <label for="faderStart">Fuel level start</label>
-            <div class="item range">
-                <i class="ion-ios-speedometer-outline fa-2x"></i><span style="margin-left:5px"></span>
-                <input type="range" min="{{entry.fuelLevelEnd}}" max="100" id="faderStart" step="6.25" ng-model="entry.fuelLevelStart" >
-                <output for="faderStart" id="fuelLevelStart" ng-bind="entry.fuelLevelStart | number:2"></output><p>%</p>
-                <p class="help-block" style="color:red; font-size:small;" ng-show="form.fle.$error.min">Value is too high</p>
-            </div>
-
-            <br/>
-
-            <label for="faderEnd">Fuel level end</label>
-            <div class="item range">
-                <i class="ion-ios-speedometer fa-2x"></i><span style="margin-left:5px"></span>
-                <input type="range" name="fle" min="0"  max="{{entry.fuelLevelStart}}" id="faderEnd" step="6.25" ng-model="entry.fuelLevelEnd">
-                <output for="faderEnd" id="fuelLevelEnd" ng-bind="entry.fuelLevelEnd | number:2"></output><p>%</p>
-                <p class="help-block" style="color:red; font-size:small;" ng-show="form.fle.$error.max">Value is too high</p>
-            </div>
-
-            <br/>
-
-            <div class="row">
-                <i class="fa fa-flag-o fa-2x" style="margin-top:5%;"></i>
-                <div class="col col-40" style="margin-left:5%; margin-right:5%; text-align: center;">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small;">Km start</span>
-                        <input min="0" name="ks" type="number" style="color: #2dab00; font-size: large" placeholder="Km start" ng-model="entry.kmStart">
-                        <p class="help-block" style="color:red; font-size:small;" ng-show="form.ks.$invalid">Invalid value</p>
-
-                    </label>
-                </div>
-
-                <i class="fa fa-flag-checkered fa-2x" style="margin-top:5%;"></i>
-                <div class="col col-40" style="margin-left:5%; margin-right:5%;">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small;">Km end</span>
-                        <input min="{{entry.kmStart}}" name="ke" type="number" style="color: #2dab00; font-size: large" placeholder="Km end" ng-model="entry.kmEnd">
-                        <p class="help-block" style="color:red; font-size:small;" ng-show="form.ke.$invalid">Invalid value</p>
-                        <p class="help-block" style="color:red; font-size:small;"  ng-show="form.ke.$error.min">Value is too small</p>
-                    </label>
-                </div>
-            </div>
-
-
-
-            <div style="text-align: center"><i class="fa fa-road fa-2x"></i>Distance: {{entry.kmEnd - entry.kmStart}} km</div>
-
-
-
-            <br/>
-            <div class="row">
-                <div class="col">
-
-                    <!--<label class="item item-input item-input-select">-->
-                    <!--<span class="input-label" style="font-size: small;">Gas station</span>-->
-                    <!--<select class="ion-input-select" ng-model="entry.gasStation"-->
-                    <!--ng-options="station for station in allGasStations">-->
-                    <!--</select>-->
-                    <!--<br/>-->
-                    <!--</label>-->
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small;">Gas station name</span>
-                        <input type="text" style="margin-left:5px;" ng-model="entry.gasStation" placeholder="Gas station name">
-                    </label>
-
-                </div>
-            </div>
-
-
-            <br/>
-
-            <div class="row">
-                <div class="col col-40" style="margin-left:20%; margin-right:20%;">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label" style="font-size: small">Tank date</span>
-                        <input type="date" style="font-size: large" ng-model="entry.tankDate">
-                    </label>
-                </div>
-            </div>
-
-            <br/>
-
-            <div>
+        <div class="row">
+            <div class="col col-50" style="margin-left:25%; margin-right:25%;">
                 <label class="item item-input item-floating-label">
-                    <span class="input-label" style="font-size: small;">Comment</span>
-                    <textarea style="font-size: large" ng-maxlength="{{300}}" placeholder="Comments" ng-model="entry.comment"></textarea>
+                    <span class="input-label" style="font-size: small">Total cost</span>
+                    <input name="tc" min="0" type="number" style="color: #2dab00; font-size: large" step="0.01" placeholder="Total cost" ng-model="entry.totalCost">
+                    <p class="help-block" style="color:red; font-size:small;" ng-show="form.tc.$invalid">Invalid value</p>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col col-40" style="margin-left:8%; margin-right:8%; text-align: center;">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label" style="font-size: small;">Liters</span>
+                    <input name="l" min="0" type="number" style="color: #2dab00; font-size: large" step="0.01" placeholder="Liters" ng-model="entry.litres">
+                    <!--<p class="help-block" style="color:red; font-size:small;" ng-show="form.l.$error.min">Value too small</p>-->
+                    <p class="help-block" style="color:red; font-size:small;" ng-show="form.l.$invalid">Invalid value</p>
+
+                </label>
+            </div>
+            <div class="col col-40" style="margin-left:8%; margin-right:8%; ">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label" style="font-size: small;">Price per liter</span>
+                    <input name="ppl" min="0" type="number" style="color: #2dab00; font-size: large" step="0.01" placeholder="Price per liter" ng-model="entry.pricePerLiter">
+                    <p class="help-block" style="color:red; font-size:small;" ng-show="form.ppl.$invalid">Invalid value</p>
+                </label>
+            </div>
+        </div>
+
+        <br/>
+
+        <label for="faderStart">Fuel level start</label>
+        <div class="item range">
+            <i class="ion-ios-speedometer-outline fa-2x"></i><span style="margin-left:5px"></span>
+            <input type="range" min="{{entry.fuelLevelEnd}}" max="100" id="faderStart" step="6.25" ng-model="entry.fuelLevelStart" >
+            <output for="faderStart" id="fuelLevelStart" ng-bind="entry.fuelLevelStart | number:2"></output><p>%</p>
+            <p class="help-block" style="color:red; font-size:small;" ng-show="form.fle.$error.min">Value is too high</p>
+        </div>
+
+        <br/>
+
+        <label for="faderEnd">Fuel level end</label>
+        <div class="item range">
+            <i class="ion-ios-speedometer fa-2x"></i><span style="margin-left:5px"></span>
+            <input type="range" name="fle" min="0"  max="{{entry.fuelLevelStart}}" id="faderEnd" step="6.25" ng-model="entry.fuelLevelEnd">
+            <output for="faderEnd" id="fuelLevelEnd" ng-bind="entry.fuelLevelEnd | number:2"></output><p>%</p>
+            <p class="help-block" style="color:red; font-size:small;" ng-show="form.fle.$error.max">Value is too high</p>
+        </div>
+
+        <br/>
+
+        <div class="row">
+            <i class="fa fa-flag-o fa-2x" style="margin-top:5%;"></i>
+            <div class="col col-40" style="margin-left:5%; margin-right:5%; text-align: center;">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label" style="font-size: small;">Km start</span>
+                    <input min="0" name="ks" type="number" style="color: #2dab00; font-size: large" placeholder="Km start" ng-model="entry.kmStart">
+                    <p class="help-block" style="color:red; font-size:small;" ng-show="form.ks.$invalid">Invalid value</p>
+
                 </label>
             </div>
 
-            <br/>
-
-            <br/>
-
-            <!--<button class="button button-royal" type="" ng-click="sendPhoto(entry, picFile)">Send photo</button>-->
-
-
-            <a class="item item-list-detail">
-                <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
-                    <img ng-repeat="imagePath in allImages track by $index" ng-if="imagePath" ng-src="{{imagePath}}" ng-click="showImages($index)" style="height:200px; padding: 5px 5px 5px 5px;"/>
-                </ion-scroll>
-            </a>
-            <br/>
-            <button class="button button-stable" ng-click="addImage()">Add picture</button>
-
-            <div class="spacer" style="width: 300px; height: 38px;"></div>
+            <i class="fa fa-flag-checkered fa-2x" style="margin-top:5%;"></i>
+            <div class="col col-40" style="margin-left:5%; margin-right:5%;">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label" style="font-size: small;">Km end</span>
+                    <input min="{{entry.kmStart}}" name="ke" type="number" style="color: #2dab00; font-size: large" placeholder="Km end" ng-model="entry.kmEnd">
+                    <p class="help-block" style="color:red; font-size:small;" ng-show="form.ke.$invalid">Invalid value</p>
+                    <p class="help-block" style="color:red; font-size:small;"  ng-show="form.ke.$error.min">Value is too small</p>
+                </label>
+            </div>
+        </div>
 
 
-            <!--<button ng-disabled="form.$invalid || form.$error.min" ng-click="edit(entry); addNewGasStation(entry.gasStation); sendPhoto()" class="button button-balanced button-block" type="submit" ui-sref="list" >Update entry</button>-->
+
+        <div style="text-align: center"><i class="fa fa-road fa-2x"></i>Distance: {{entry.kmEnd - entry.kmStart}} km</div>
 
 
+
+        <br/>
+        <div class="row">
+            <div class="col">
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label" style="font-size: small;">Gas station name</span>
+                    <input type="text" style="margin-left:5px;" ng-model="entry.gasStation" placeholder="Gas station name">
+                </label>
+
+            </div>
+        </div>
+
+
+        <br/>
+
+        <div class="row">
+            <div class="col col-40" style="margin-left:20%; margin-right:20%;">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label" style="font-size: small">Tank date</span>
+                    <input type="date" style="font-size: large" ng-model="entry.tankDate">
+                </label>
+            </div>
+        </div>
+
+        <br/>
+
+        <div>
+            <label class="item item-input item-floating-label">
+                <span class="input-label" style="font-size: small;">Comment</span>
+                <textarea style="font-size: large" ng-maxlength="{{300}}" placeholder="Comments" ng-model="entry.comment"></textarea>
+            </label>
+        </div>
+
+        <br/>
+
+        <br/>
+
+        <a class="item item-list-detail">
+            <ion-scroll direction="x" style="height:200px; min-height: 200px; overflow: scroll; white-space: nowrap;">
+                <img ng-repeat="imagePath in allImages track by $index" ng-if="imagePath" ng-src="{{imagePath}}" ng-click="showImages($index)" style="height:200px; padding: 5px 5px 5px 5px;"/>
+            </ion-scroll>
+        </a>
+        <br/>
+        <button class="button button-stable" ng-click="addImage()">Add picture</button>
+
+        <div class="spacer" style="width: 300px; height: 38px;"></div>
     </ion-content>
     </form>
 </ion-view>

@@ -1,9 +1,7 @@
 <div class="modal image-modal transparent" on-swipe-down="closeModal()" >
 
 	<ion-slide-box on-slide-changed="slideChanged(index)" active-slide="activeSlide">
-
 		<ion-slide ng-repeat="image in allImages">
-
 
 			<ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
 						zooming="true" min-zoom="{{zoomMin}}" style="width: 100%; height: 100%"
@@ -51,6 +49,5 @@
 
 	<span class="close" on-tap="closeModal()">×</span>
 	<span class="trashModal" on-tap="deletePhoto(activeSlide, entry.entryId); closeModal()" ><i class="fa fa-trash-o fa-inverse fa-2x" ></i></span>
-
 
 </div>

@@ -14,7 +14,6 @@ var example = angular.module('app', ['ionic', 'restangular', 'angularMoment', 'i
                 StatusBar.styleDefault();
             }
 
-
             var createQuery = "CREATE TABLE IF NOT EXISTS Entry (\
                     entryId integer primary key autoincrement,\
                     totalCost float,\
@@ -58,7 +57,6 @@ var example = angular.module('app', ['ionic', 'restangular', 'angularMoment', 'i
                         message = message;
                         console.log("meesss: ", message);
                     });
-
 
             }();
         });

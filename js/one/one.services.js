@@ -1,4 +1,3 @@
-//zabawa z restangularem
 angular.module('one.services', ['restangular'])
 
 .config(function (RestangularProvider) {
@@ -14,10 +13,5 @@ angular.module('one.services', ['restangular'])
 		Restangular.all('/test').customPOST({test:'hello1237'}).then(function(response){
 			console.log("photo service is working?", response);
 		});
-
 	}
-
 })
-
-
-

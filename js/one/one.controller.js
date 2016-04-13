@@ -18,27 +18,15 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 			$scope.testingPath = [];
 			$scope.trueOrigins = [];
 			$scope.fileNameToSave = '';
-			//$scope.imagesSuffixes = [];
-
-
-			//$scope.images = FileService.images();
 
 			dbService.handleDb().then(function (result) {
 				var db = result;
 
-				//$ionicPlatform.ready(function() {
-				//
-				//	//$scope.$apply();
-				//});
-
 				// #DB updates imagePath in table Entry after deleting one photo
 				$scope.updateDbAfterDelete = function(newImagePath, entryId) {
-					console.log("nip w udad: ", newImagePath);
 					var queryUpdateEntry = "update Entry set imagePath=? where entryId=?";
 					$cordovaSQLite.execute(db, queryUpdateEntry, [newImagePath, entryId]).then(function(result) {
-						console.log("recent entry: ", newImagePath);
 						console.log("update entry correct");
-						//$scope.get();
 					}, function(err) {
 						console.log("update entry error", err);
 					});
@@ -48,27 +36,16 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 				// #DB deletes image path from set of image paths assigned to entry
 				$scope.deletePhoto = function(imageId, entryId) {
 					var newImagePath = "";
-
-					//var pathToBeDeleted = "";
-					console.log("id of image to be deleted: ", imageId);
-
 					var queryLoadAllPhotos = "select imagePath from Entry where entryId = ?";
 					$cordovaSQLite.execute(db, queryLoadAllPhotos, [entryId]).then(function(result) {
-						console.log("przed usunieciem zdjecia: ", result.rows.item(0).imagePath);
-
 						var entryImagesTab = JSON.parse(unescape(result.rows.item(0).imagePath)); //all images unJSONed
 
 						// update gallery after delete
 						if (imageId > -1) {
 							entryImagesTab.splice(imageId, 1); //images tab without deleted element
 							$scope.allImages.splice(imageId, 1);
-							console.log("all images po usunieciu zdjecia", $scope.allImages);
 						}
-
-						console.log("newimgpath: ", entryImagesTab);
 						newImagePath = escape(JSON.stringify(entryImagesTab)); //change path to json
-						console.log("aaaa: ", newImagePath);
-
 						$scope.updateDbAfterDelete(newImagePath, entryId);
 					});
 				};
@@ -120,7 +97,6 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 					}, function(error) {
 						console.log("delete entry error " + error);
 					});
-
 				};
 
 
@@ -138,7 +114,6 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 							console.log("No results found");
 						}
 
-
 						$scope.entry = {
 							entryId: res.rows.item(0).entryId,
 							totalCost: res.rows.item(0).totalCost,
@@ -153,7 +128,6 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 							comment: res.rows.item(0).comment,
 							imagePath: res.rows.item(0).imagePath,
 						};
-						console.log("imagePath: aaaaa ", $scope.entry.imagePath);
 
 						if (res.rows.item(0).imagePath) {
 							$scope.imagesPaths = unescape(res.rows.item(0).imagePath);
@@ -167,13 +141,12 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 						var nameOfFile;
 						var srcPath;
 						$scope.allImages = [];
-						console.log("### length of imagesPaths: ", $scope.imagesPaths.length);
+
 						for (var i = 0; i < $scope.imagesPaths.length; i++) {
 							srcPath = $scope.imagesPaths[i];
 							console.log("srcpath: " + srcPath);
-							$scope.allImages.push(srcPath); //form: http://0.0.0.0:5000/static/bcd596073dd24e22949f8d6a904f1bf3_t.jpg
+							$scope.allImages.push(srcPath); 
 						}
-						console.log("all images: " + $scope.allImages);
 					}, function(err) {
 						console.log('get error ', err);
 					});
@@ -182,12 +155,9 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 					var query2 = "select name from GasStations";
 					var gasStationMap = [];
 
-					$cordovaSQLite.execute(db, query2, []).then(function(res) {
-						//console.log("gasStations: ", res);
-						//console.log("res.rows.item(0).name: ", res.rows.item(0).name);
+					$cordovaSQLite.execute(db, query2, []).then(function(res) {				
 						//don't make duplicates on list
 						for (var el = 0; el < res.rows.length; el++) {
-
 							if (!gasStationMap[res.rows.item(el).name]) { // if we haven't tanked in this gas station yet
 								gasStationMap[res.rows.item(el).name] = 1;
 								$scope.allGasStations.push(res.rows.item(el).name);
@@ -195,10 +165,7 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 							else {
 								gasStationMap[res.rows.item(el).name]++;
 							}
-						}
-						//console.log("$scope.allGasStations: ", $scope.allGasStations);
-						//console.log("gasstationmap: ", gasStationMap);
-
+						}					
 					}, function(err) {
 						console.log('get gas stations error ', err);
 					});
@@ -208,13 +175,11 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 
 				// #DB add gas station to database
 				$scope.addNewGasStation = function(newGasStation) {
-					console.log("dat iz new gas station: ", newGasStation);
 					$scope.allGasStations.push(newGasStation);
 					$scope.entry.gasStation = "";
 
 					var query3 = "insert or ignore into GasStations (name) values (?)";
 					$cordovaSQLite.execute(db, query3, [newGasStation]).then(function(res) {
-						console.log("new gas station added?: ", res);
 						$scope.allGasStations.push(newGasStation);
 						$scope.entry.gasStation = newGasStation;
 					}, function(err) {
@@ -239,7 +204,6 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 
 				$scope.addImage = function() {
 					var options = {
-						//destinationType: Camera.DestinationType.DATA_URL,
 						destinationType: Camera.DestinationType.FILE_URI,
 						sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
 						allowEdit: false,
@@ -249,22 +213,14 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 					};
 
 					$cordovaCamera.getPicture(options).then(function(imageData) {
-						console.log("imagedatatatatata: ", imageData);
 						$scope.images.push(imageData);
 						$scope.allImages.push(imageData);
-
-						console.log("$scope.images: ", $scope.images);
-						console.log("$scope.allImages: ", $scope.allImages);
-
 						$scope.sendFileToServer(imageData);
 					});
-
 				};
 
 
-				$scope.sendFileToServer = function(imageData){
-
-					//var path = '';
+				$scope.sendFileToServer = function(imageData){			
 					var win = function (r) {
 						console.log("Code = " + r.responseCode);
 						console.log("Response = " + r.response);
@@ -272,18 +228,9 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 						console.log("response img_path: ", JSON.parse(r.response).img_path);
 						$scope.fileNameToSave = JSON.parse(r.response).img_path;
 						console.log("path: ", $scope.backendHost + $scope.fileNameToSave);
-						//path = $scope.backendHost + $scope.fileNameToSave;
+
 						$scope.allImages.push($scope.backendHost + $scope.fileNameToSave);
 						$scope.images.push($scope.backendHost + $scope.fileNameToSave);
-
-
-						//$scope.imagesSuffixes.push($scope.fileNameToSave);
-
-						//console.log("images suffixes: ", $scope.imagesSuffixes);
-
-						//$scope.images.push($scope.fileNameToSave);
-						console.log("all images yeah: ", $scope.allImages);
-
 					};
 
 					var fail = function (error) {
@@ -298,9 +245,6 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 
 					var ft = new FileTransfer();
 					ft.upload(imageData,  $scope.backendHost + '/test', win, fail, options);
-
-					console.log("sendfiletoserv");
-
 				};
 
 
@@ -310,15 +254,8 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 				//$scope.allImages: table of path to images from database and added, they are shown in gallery
 				//update database
 				$scope.sendPhoto = function() {
-
-					console.log("$scope.images: ", $scope.images);
 					var noOfImages = $scope.images.length;
-					console.log("##** noofimages: ", noOfImages);
-					console.log("##** noofimagespaths: ", $scope.imagesPaths.length);
-
-
-					//console.log("$scope.imagePath: ", $scope.imagePath);
-
+				
 					//if there are images in entry
 					if ($scope.imagesPaths.length > 0) {
 						console.log("$scope.imagesPaths: ", $scope.imagesPaths);
@@ -326,27 +263,16 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 
 					} else {
 						$scope.imagesPaths = [];
-
 					}
 					for (var i = 0; i < $scope.images.length ; i++) {
 						$scope.imagesPaths.push($scope.images[i]);
-
-					}
-					console.log("BBBB $scope.imagesPaths: ", $scope.imagesPaths);
+					}				
 
 					$scope.images = [];
 
-					console.log("BBBB $scope.allImages: ", $scope.allImages);
-
 					newPathImg = escape(JSON.stringify($scope.allImages));
-					console.log("!!! newpathimg: ", newPathImg);
-
-					console.log("entryId: ", entryId);
-					console.log("noOfImages: ", noOfImages);
-
+				
 					if (noOfImages > 0) {
-						console.log("sss $scope.images.length: ", $scope.images.length);
-						console.log("entryId: ", entryId);
 						var query = "update Entry set imagePath=? where entryId=?";
 						$cordovaSQLite.execute(db, query, [newPathImg, entryId]).then(function (result) {
 							console.log("database updated");
@@ -354,10 +280,7 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 							console.log("database update error ", err);
 						});
 					}
-
-
 				};
-
 
 
 				// #DB updates entry in database
@@ -370,17 +293,11 @@ angular.module('oneController', ['oneFilters', 'one.services'])
 						"where entryId = ?";
 
 					$cordovaSQLite.execute(db, query, [entry.totalCost, entry.litres, entry.pricePerLiter, entry.tankDate, entry.fuelLevelStart, entry.fuelLevelEnd, entry.kmStart, entry.kmEnd, entry.gasStation, entry.comment, entry.entryId]).then(function(result) {
-						//console.log("new img path: ", entry.imagePath);
-						console.log("gas station: ", entry.gasStation);
 						$state.go('list');
 					}, function(error) {
 						console.log("update entry error " + error);
 					});
-					//$state.reload();
 					$scope.goToListView();
 				};
-
-
 			})});
-
 

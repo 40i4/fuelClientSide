@@ -29,8 +29,6 @@ angular.module('addController', [])
           comment:''
         };
 
-
-
         $scope.getElements = dbService.handleDb().then(function (result) {
           var db = result;
 
@@ -86,7 +84,6 @@ angular.module('addController', [])
 
           $scope.addImage = function() {
             var options = {
-              //destinationType: Camera.DestinationType.DATA_URL,
               destinationType: Camera.DestinationType.FILE_URI,
               sourceType: Camera.PictureSourceType.CAMERA, // Camera.PictureSourceType.PHOTOLIBRARY
               allowEdit: false,
@@ -107,8 +104,8 @@ angular.module('addController', [])
 
               $scope.sendFileToServer(imageData);
             });
-
           };
+
 
           $scope.sendFileToServer = function(imageData) {
 
@@ -124,8 +121,6 @@ angular.module('addController', [])
               $scope.images.push($scope.backendHost + $scope.fileNameToSave);
               $scope.newPathImg.push($scope.backendHost + $scope.fileNameToSave);
               $scope.imagesToAdd.push($scope.backendHost + $scope.fileNameToSave);
-
-              console.log("all images yeah: ", $scope.allImages);
 
             };
 
@@ -143,9 +138,7 @@ angular.module('addController', [])
             ft.upload(imageData,  $scope.backendHost + '/test', win, fail, options);
 
             console.log("sendfiletoserv");
-
           };
-
 
 
           $scope.insert = function(dataToInsert, tankDate) {
@@ -207,13 +200,10 @@ angular.module('addController', [])
             console.log("old path: ", $scope.imagesToAdd);
             if($scope.imagesToAdd.length > 0){
               if (imageId > -1) {
-                //unescapedNewPath = JSON.parse(unescape($scope.newPathImg));
-                //unescapedNewPath.splice(imageId, 1);
                 $scope.imagesToAdd.splice(imageId, 1);
                 $scope.allImages.splice(imageId, 1);
                 $scope.images.splice(imageId, 1);
             }
-
 
               console.log("imagesToAdd po usunieciu zdjecia", $scope.imagesToAdd);
               console.log("allImages po usunieciu zdjecia", $scope.allImages);
@@ -221,13 +211,9 @@ angular.module('addController', [])
             }
           };
 
-
           $scope.images = [];
 
-
         });
-
       }
-
     ])
 
